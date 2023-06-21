@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 class NewOrder extends StatefulWidget {
@@ -23,11 +24,49 @@ class _NewOrderState extends State<NewOrder>
   String week = '';
   int range = 0;
   String time = DateFormat("h:mm a").format(DateTime.now());
+  final carController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
+    final carField = TextFormField(
+        maxLength: 15,
+        autofocus: false,
+        controller: carController,
+        keyboardType: TextInputType.emailAddress,
+        validator: (value) {
+          if (value!.isEmpty) {
+            return 'Car ?';
+          }
+        },
+        onSaved: (value) {
+          carController.text = value!;
+        },
+        decoration: InputDecoration(
+            constraints: const BoxConstraints(maxWidth: 300),
+            floatingLabelBehavior: FloatingLabelBehavior.never,
+            errorStyle: GoogleFonts.poppins(
+              textStyle: const TextStyle(
+                color: Color(0xFFFF1C0C),
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            fillColor: Colors.white,
+            filled: true,
+            prefixIcon: const Icon(Icons.directions_car_filled,
+                color: Color(0xFF702c00)),
+            contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+            hintText: "Car",
+            hintStyle: GoogleFonts.poppins(
+              textStyle: const TextStyle(
+                fontSize: 16.0,
+                color: Color(0xFF702c00),
+              ),
+            ),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+            )));
     return Scaffold(
-      appBar: AppBar(title: const Text('New Order')),
+      appBar: AppBar(title: const Text('Car Booking')),
       body: Center(
         child: Container(
           height: height,
@@ -36,6 +75,7 @@ class _NewOrderState extends State<NewOrder>
             child: Form(
               key: _formKey,
               child: Column(children: [
+                carField,
                 ElevatedButton.icon(
                   onPressed: () async {
                     TimeOfDay? newtime = await showTimePicker(
