@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Car Rental App',
-      theme: ThemeData(),
+      theme: ThemeData(primarySwatch: Colors.deepPurple),
       home: const MyHomePage(),
     );
   }
