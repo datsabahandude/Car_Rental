@@ -147,43 +147,58 @@ class _NewOrderState extends State<NewOrder>
                     CircleAvatar(
                       backgroundColor: Colors.deepPurpleAccent,
                       radius: 82,
-                      child: const CircleAvatar(
-                          backgroundImage: AssetImage("images/Alza.jpg"),
-                          backgroundColor: Colors.transparent,
-                          radius: 80),
-                    ),
-                    const SizedBox(height: 15),
-                    DropdownButtonFormField(
-                      value: _selectedVal,
-                      items: status
-                          .map((e) => DropdownMenuItem(
-                              value: e,
-                              child: Text(
-                                e,
-                                style: GoogleFonts.poppins(
-                                  textStyle: const TextStyle(
-                                      color: Color(0xFF702c00),
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              )))
-                          .toList(),
-                      onChanged: (val) {
-                        setState(() {
-                          _selectedVal = val as String;
-                        });
-                      },
-                      dropdownColor: Colors.white,
-                      decoration: InputDecoration(
-                        constraints: const BoxConstraints(maxWidth: 300),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        fillColor: Colors.white,
-                        filled: true,
-                        contentPadding:
-                            const EdgeInsets.fromLTRB(20, 15, 20, 15),
-                      ),
+                      child: _selectedVal == 'MYVI GEN3'
+                          ? const CircleAvatar(
+                              backgroundImage: AssetImage("images/Myvi.jpg"),
+                              backgroundColor: Colors.transparent,
+                              radius: 80)
+                          : _selectedVal == 'AXIA'
+                              ? const CircleAvatar(
+                                  backgroundImage:
+                                      AssetImage("images/Axia.jpg"),
+                                  backgroundColor: Colors.transparent,
+                                  radius: 80)
+                              : _selectedVal == 'ALZA'
+                                  ? const CircleAvatar(
+                                      backgroundImage:
+                                          AssetImage("images/Alza.jpg"),
+                                      backgroundColor: Colors.transparent,
+                                      radius: 80)
+                                  : _selectedVal == 'AVANZA'
+                                      ? const CircleAvatar(
+                                          backgroundImage:
+                                              AssetImage("images/Avanza.jpg"),
+                                          backgroundColor: Colors.transparent,
+                                          radius: 80)
+                                      : _selectedVal == 'BEZZA'
+                                          ? const CircleAvatar(
+                                              backgroundImage: AssetImage(
+                                                  "images/Bezza.jpg"),
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              radius: 80)
+                                          : _selectedVal == 'EXORA TURBO'
+                                              ? const CircleAvatar(
+                                                  backgroundImage: AssetImage(
+                                                      "images/Exora.jpg"),
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  radius: 80)
+                                              : _selectedVal == 'SAGA'
+                                                  ? const CircleAvatar(
+                                                      backgroundImage:
+                                                          AssetImage(
+                                                              "images/Saga.jpg"),
+                                                      backgroundColor:
+                                                          Colors.transparent,
+                                                      radius: 80)
+                                                  : const CircleAvatar(
+                                                      backgroundImage:
+                                                          AssetImage(
+                                                              "images/Alza.jpg"),
+                                                      backgroundColor:
+                                                          Colors.transparent,
+                                                      radius: 80),
                     ),
                     const SizedBox(height: 15),
                     ElevatedButton.icon(
@@ -213,34 +228,6 @@ class _NewOrderState extends State<NewOrder>
                               MaterialStateProperty.all(Colors.white)),
                     ),
                     const SizedBox(height: 15),
-                    // ElevatedButton.icon(
-                    //   onPressed: () async {
-                    //     DateTime? newdate = await showDatePicker(
-                    //       context: context,
-                    //       initialDate: datenow,
-                    //       firstDate: DateTime(2020),
-                    //       lastDate: DateTime(2040),
-                    //     );
-                    //     if (newdate == null) return;
-                    //     setState(() => datenow = newdate);
-                    //     date = DateFormat('d MMM yyyy, EEEE').format(datenow);
-                    //     day = DateFormat('d (EEEE)').format(datenow);
-                    //     DateTime firstDayOfMonth =
-                    //         DateTime(datenow.year, datenow.month, 1);
-                    //     int startDay = firstDayOfMonth.weekday;
-                    //     int currentDay = datenow.day;
-                    //     int currentWeek = ((currentDay + startDay - 1) / 7).ceil();
-                    //     week =
-                    //         '$currentWeek (${DateFormat('MMM').format(datenow)})';
-                    //     Duration difference = datenow.difference(DateTime.now());
-                    //     range = difference.inDays;
-                    //   },
-                    //   icon: const Icon(Icons.calendar_month_outlined,
-                    //       color: Color(0xFF702c00)),
-                    //   label: Text(date),
-                    //   style: ButtonStyle(
-                    //       backgroundColor: MaterialStateProperty.all(Colors.white)),
-                    // ),
                     ElevatedButton(
                       onPressed: () async {
                         DateTimeRange? newdate = await showDateRangePicker(
@@ -285,6 +272,39 @@ class _NewOrderState extends State<NewOrder>
                           )
                         : Container(),
                     const SizedBox(height: 15),
+                    DropdownButtonFormField(
+                      value: _selectedVal,
+                      items: status
+                          .map((e) => DropdownMenuItem(
+                              value: e,
+                              child: Text(
+                                e,
+                                style: GoogleFonts.poppins(
+                                  textStyle: const TextStyle(
+                                      color: Color(0xFF702c00),
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              )))
+                          .toList(),
+                      onChanged: (val) {
+                        setState(() {
+                          _selectedVal = val as String;
+                        });
+                      },
+                      dropdownColor: Colors.white,
+                      decoration: InputDecoration(
+                        constraints: const BoxConstraints(maxWidth: 300),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        fillColor: Colors.white,
+                        filled: true,
+                        contentPadding:
+                            const EdgeInsets.fromLTRB(20, 15, 20, 15),
+                      ),
+                    ),
+                    const SizedBox(height: 30),
                     priceField,
                     const SizedBox(height: 15),
                     detailsField,
@@ -292,6 +312,11 @@ class _NewOrderState extends State<NewOrder>
             ),
           ),
         ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {},
+        label: const Text('SUBMIT'),
       ),
     );
   }
