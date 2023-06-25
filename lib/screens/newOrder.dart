@@ -70,7 +70,7 @@ class _NewOrderState extends State<NewOrder>
         decoration: InputDecoration(
             constraints: const BoxConstraints(maxWidth: 300),
             floatingLabelBehavior: FloatingLabelBehavior.never,
-            errorStyle: GoogleFonts.poppins(
+            errorStyle: GoogleFonts.manrope(
               textStyle: const TextStyle(
                 color: Color(0xFFFF1C0C),
                 fontWeight: FontWeight.w500,
@@ -79,14 +79,14 @@ class _NewOrderState extends State<NewOrder>
             fillColor: Colors.white,
             filled: true,
             prefixIcon: const Icon(Icons.monetization_on_outlined,
-                color: Color(0xFF702c00)),
+                color: Color(0xff360c72)),
             contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
             // contentPadding: const EdgeInsets.symmetric(vertical: 40)
             hintText: "Price (RM)",
-            hintStyle: GoogleFonts.poppins(
+            hintStyle: GoogleFonts.manrope(
               textStyle: const TextStyle(
                 fontSize: 16.0,
-                color: Color(0xFF702c00),
+                color: Colors.black,
               ),
             ),
             border: OutlineInputBorder(
@@ -110,7 +110,7 @@ class _NewOrderState extends State<NewOrder>
         decoration: InputDecoration(
             constraints: const BoxConstraints(maxWidth: 300),
             floatingLabelBehavior: FloatingLabelBehavior.never,
-            errorStyle: GoogleFonts.poppins(
+            errorStyle: GoogleFonts.manrope(
               textStyle: const TextStyle(
                 color: Color(0xFFFF1C0C),
                 fontWeight: FontWeight.w500,
@@ -118,14 +118,14 @@ class _NewOrderState extends State<NewOrder>
             ),
             fillColor: Colors.white,
             filled: true,
-            prefixIcon: const Icon(Icons.description, color: Color(0xFF702c00)),
+            prefixIcon: const Icon(Icons.description, color: Color(0xff360c72)),
             contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
             // contentPadding: const EdgeInsets.symmetric(vertical: 40)
             hintText: "Info",
-            hintStyle: GoogleFonts.poppins(
+            hintStyle: GoogleFonts.manrope(
               textStyle: const TextStyle(
                 fontSize: 16.0,
-                color: Color(0xFF702c00),
+                color: Colors.black,
               ),
             ),
             border: OutlineInputBorder(
@@ -145,7 +145,7 @@ class _NewOrderState extends State<NewOrder>
                   children: [
                     const SizedBox(height: 15),
                     CircleAvatar(
-                      backgroundColor: Colors.deepPurpleAccent,
+                      backgroundColor: const Color(0xff360c72),
                       radius: 82,
                       child: _selectedVal == 'MYVI GEN3'
                           ? const CircleAvatar(
@@ -217,7 +217,7 @@ class _NewOrderState extends State<NewOrder>
                         }
                       },
                       icon: const Icon(Icons.av_timer_outlined,
-                          color: Color(0xFF702c00)),
+                          color: Color(0xff360c72)),
                       label: Text(
                         time,
                         textAlign: TextAlign.start,
@@ -249,7 +249,7 @@ class _NewOrderState extends State<NewOrder>
                           backgroundColor:
                               MaterialStateProperty.all(Colors.white)),
                       child: const Icon(Icons.calendar_month_outlined,
-                          color: Color(0xFF702c00)),
+                          color: Color(0xff360c72)),
                     ),
                     const SizedBox(height: 15),
                     startDate != null
@@ -279,9 +279,9 @@ class _NewOrderState extends State<NewOrder>
                               value: e,
                               child: Text(
                                 e,
-                                style: GoogleFonts.poppins(
+                                style: GoogleFonts.manrope(
                                   textStyle: const TextStyle(
-                                      color: Color(0xFF702c00),
+                                      color: Colors.black,
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold),
                                 ),
@@ -316,7 +316,17 @@ class _NewOrderState extends State<NewOrder>
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {},
-        label: const Text('SUBMIT'),
+        backgroundColor: Colors.white,
+        icon: Text('submit'.toUpperCase(),
+            style: GoogleFonts.manrope(
+                textStyle: const TextStyle(fontSize: 16, color: Colors.black))),
+        label: const Icon(
+          Icons.fact_check,
+          color: Color(0xff360c72),
+        ),
+        clipBehavior: Clip.antiAlias,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        elevation: 5,
       ),
     );
   }
