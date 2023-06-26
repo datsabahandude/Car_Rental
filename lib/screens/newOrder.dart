@@ -106,7 +106,7 @@ class _NewOrderState extends State<NewOrder>
         onSaved: (value) {
           details.text = value!;
         },
-        textInputAction: TextInputAction.next,
+        textInputAction: TextInputAction.newline,
         decoration: InputDecoration(
             constraints: const BoxConstraints(maxWidth: 300),
             floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -132,7 +132,11 @@ class _NewOrderState extends State<NewOrder>
               borderRadius: BorderRadius.circular(10),
             )));
     return Scaffold(
-      appBar: AppBar(title: const Text('Car Booking')),
+      appBar: AppBar(
+          title: Text(
+        'Car Booking',
+        style: GoogleFonts.manrope(),
+      )),
       body: Center(
         child: Container(
           height: height,
@@ -221,7 +225,8 @@ class _NewOrderState extends State<NewOrder>
                       label: Text(
                         time,
                         textAlign: TextAlign.start,
-                        style: const TextStyle(color: Colors.black),
+                        style: GoogleFonts.manrope(
+                            textStyle: const TextStyle(color: Colors.black)),
                       ),
                       style: ButtonStyle(
                           backgroundColor:
@@ -266,9 +271,9 @@ class _NewOrderState extends State<NewOrder>
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(20)),
                             child: Text(
-                              '$startDate\n-\n$endDate\n${selectedDates.duration.inDays} Day(s)',
-                              textAlign: TextAlign.center,
-                            ),
+                                '$startDate\n-\n$endDate\n${selectedDates.duration.inDays} Day(s)',
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.manrope()),
                           )
                         : Container(),
                     const SizedBox(height: 15),
@@ -308,6 +313,7 @@ class _NewOrderState extends State<NewOrder>
                     priceField,
                     const SizedBox(height: 15),
                     detailsField,
+                    const SizedBox(height: 100)
                   ]),
             ),
           ),
