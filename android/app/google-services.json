@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "784481385601",
+    "project_id": "carrental-93a8f",
+    "storage_bucket": "carrental-93a8f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:784481385601:android:1741bc552fe27f040b2180",
+        "android_client_info": {
+          "package_name": "com.datsabahandude.car_rental"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "784481385601-qae3558nb2krd00btgp396nqapu2bb3q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdlEKOJhPTi5iQGIUKBhmdtAc-WLgU2Pk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "784481385601-qae3558nb2krd00btgp396nqapu2bb3q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

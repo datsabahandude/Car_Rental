@@ -1,7 +1,12 @@
-import 'package:car_rental/screens/newOrder.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:car_rental/screens/login_page.dart';
+import 'package:car_rental/screens/newOrder.dart';
 
-void main() {
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -15,7 +20,24 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Car Rental App',
       theme: ThemeData(primarySwatch: Colors.deepPurple),
-      home: const NewOrder(),
+      home: const First(),
     );
   }
+}
+
+class First extends StatelessWidget {
+  const First({super.key});
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+          body: StreamBuilder<User?>(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return const NewOrder();
+          } else {
+            return const LoginPage();
+          }
+        },
+      ));
 }
