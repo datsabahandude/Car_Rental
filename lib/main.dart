@@ -1,8 +1,8 @@
+import 'package:car_rental/screens/homepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:car_rental/screens/login_page.dart';
-import 'package:car_rental/screens/newOrder.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,7 +34,7 @@ class First extends StatelessWidget {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return const NewOrder();
+            return const HomePage();
           } else {
             return const LoginPage();
           }
