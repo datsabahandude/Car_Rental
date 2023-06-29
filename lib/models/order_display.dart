@@ -1,31 +1,28 @@
 class OrderList {
   String? oid;
-  String? cid;
+  String? range;
   int? time;
   String? status;
-  String? customer;
+  String? info;
   String? price;
-  String? location;
   String? img;
   OrderList();
 
   Map<String, dynamic> toJson() => {
         'oid': oid,
-        'cid': cid,
+        'range': range,
         'time': time,
         'status': status,
-        'name': customer,
+        'info': info,
         'price': price,
-        'location': location,
         'image url': img,
       };
   OrderList.fromSnapshot(snapshot)
       : oid = snapshot.data()['oid'],
-        cid = snapshot.data()['cid'],
+        range = snapshot.data()['range'],
         time = snapshot.data()['time'],
         status = snapshot.data()['status'],
-        customer = snapshot.data()['name'],
+        info = snapshot.data()['info'],
         price = snapshot.data()['price'],
-        location = snapshot.data()['location'],
         img = snapshot.data()['image url'];
 }

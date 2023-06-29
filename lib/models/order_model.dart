@@ -1,49 +1,46 @@
 class OrderModel {
-  String? uid;
+  // String? uid;
   String? oid;
-  String? cid;
   int? time;
+  String? range;
   String? status;
-  String? customer;
   String? price;
-  String? location;
+  String? info;
   String? img;
   OrderModel(
-      {this.uid,
+      {
+      // this.uid,
       this.oid,
-      this.cid,
       this.time,
+      this.range,
       this.status,
-      this.customer,
       this.price,
-      this.location,
+      this.info,
       this.img});
 
   //retrieve data from server
   factory OrderModel.fromMap(map) {
     return OrderModel(
-      uid: map['uid'],
+      // uid: map['uid'],
       oid: map['oid'],
-      cid: map['cid'],
       time: map['time'],
+      range: map['range'],
       status: map['status'],
-      customer: map['name'],
       price: map['price'],
-      location: map['location'],
+      info: map['info'],
       img: map['image url'],
     );
   }
 //send data to server
   Map<String, dynamic> toMap() {
     return {
-      'uid': uid,
+      // 'uid': uid,
       'oid': oid,
-      'cid': cid,
       'time': time,
+      'range': range,
       'status': status,
-      'name': customer,
       'price': price,
-      'location': location,
+      'info': info,
       'image url': img,
     };
   }

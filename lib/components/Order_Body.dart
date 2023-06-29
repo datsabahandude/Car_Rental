@@ -39,14 +39,14 @@ class _OrderBodyState extends State<OrderBody> {
     double width = size.width;
     return Container(
       child: _isLoading
-          ? Center(
+          ? const Center(
               child: CircularProgressIndicator(),
             )
           : _itemlist.isEmpty
               ? Center(
                   child: Text('No Order',
                       style: GoogleFonts.manrope(
-                        textStyle: TextStyle(fontSize: 26),
+                        textStyle: const TextStyle(fontSize: 26),
                       )),
                 )
               : Center(
@@ -56,7 +56,7 @@ class _OrderBodyState extends State<OrderBody> {
                     child: Column(
                       children: [
                         Expanded(
-                          child: Container(
+                          child: SizedBox(
                             width: width,
                             height: height * 0.88,
                             child: RefreshIndicator(
@@ -65,7 +65,7 @@ class _OrderBodyState extends State<OrderBody> {
                               },
                               child: ListView.builder(
                                 itemCount: _itemlist.length,
-                                padding: EdgeInsets.all(12),
+                                padding: const EdgeInsets.all(12),
                                 itemBuilder: (context, index) {
                                   final item = _itemlist[index];
                                   return OrderCard(item as OrderList);

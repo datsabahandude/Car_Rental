@@ -1,10 +1,15 @@
 import 'package:car_rental/models/order_display.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 // import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+
+import '../models/order_model.dart';
+import '../screens/homepage.dart';
 
 // import '../models/order_model.dart';
 
@@ -84,20 +89,29 @@ class OrderCard extends StatelessWidget {
                 child: InkWell(
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
-                    child: card.img == null
+                    child: card.img == 'MYVI GEN3'
                         ? Image.asset(
-                            'assets/ezorder.png',
+                            'images/Myvi.jpg',
                             fit: BoxFit.cover,
                           )
-                        : Image.network(
-                            '${card.img}',
-                            fit: BoxFit.cover,
-                            errorBuilder: (BuildContext context,
-                                Object exception, StackTrace? stackTrace) {
-                              return Image.asset('assets/ezorder.png',
-                                  fit: BoxFit.cover);
-                            },
-                          ),
+                        : card.img == 'AXIA'
+                            ? Image.asset('images/Axia.jpg', fit: BoxFit.cover)
+                            : card.img == 'ALZA'
+                                ? Image.asset('images/Alza.jpg',
+                                    fit: BoxFit.cover)
+                                : card.img == 'AVANZA'
+                                    ? Image.asset('images/Avanza.jpg',
+                                        fit: BoxFit.cover)
+                                    : card.img == 'BEZZA'
+                                        ? Image.asset('images/Bezza.jpg',
+                                            fit: BoxFit.cover)
+                                        : card.img == 'EXORA TURBO'
+                                            ? Image.asset('images/Exora.jpg',
+                                                fit: BoxFit.cover)
+                                            : Image.asset(
+                                                'images/Saga.jpg',
+                                                fit: BoxFit.cover,
+                                              ),
                   ),
                   onTap: () {
                     showDialog(
@@ -105,20 +119,32 @@ class OrderCard extends StatelessWidget {
                         builder: ((context) {
                           return AlertDialog(
                             backgroundColor: Colors.transparent,
-                            content: card.img == null
+                            content: card.img == 'MYVI GEN3'
                                 ? Image.asset(
-                                    'assets/ezorder.png',
+                                    'images/Myvi.jpg',
                                     fit: BoxFit.cover,
-                                    width: width,
                                   )
-                                : Image.network('${card.img}',
-                                    fit: BoxFit.cover, width: width,
-                                    errorBuilder: (BuildContext context,
-                                        Object exception,
-                                        StackTrace? stackTrace) {
-                                    return Image.asset('assets/ezorder.png',
-                                        fit: BoxFit.cover);
-                                  }),
+                                : card.img == 'AXIA'
+                                    ? Image.asset('images/Axia.jpg',
+                                        fit: BoxFit.cover)
+                                    : card.img == 'ALZA'
+                                        ? Image.asset('images/Alza.jpg',
+                                            fit: BoxFit.cover)
+                                        : card.img == 'AVANZA'
+                                            ? Image.asset('images/Avanza.jpg',
+                                                fit: BoxFit.cover)
+                                            : card.img == 'BEZZA'
+                                                ? Image.asset(
+                                                    'images/Bezza.jpg',
+                                                    fit: BoxFit.cover)
+                                                : card.img == 'EXORA TURBO'
+                                                    ? Image.asset(
+                                                        'images/Exora.jpg',
+                                                        fit: BoxFit.cover)
+                                                    : Image.asset(
+                                                        'images/Saga.jpg',
+                                                        fit: BoxFit.cover,
+                                                      ),
                           );
                         }));
                   },
@@ -139,8 +165,8 @@ class OrderCard extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(
-                              '${card.customer}',
-                              style: GoogleFonts.poppins(
+                              '${card.img}',
+                              style: GoogleFonts.manrope(
                                   fontSize: 18,
                                   textStyle: const TextStyle(
                                       color: Color(0xFF702c00),
@@ -152,7 +178,7 @@ class OrderCard extends StatelessWidget {
                           Expanded(
                             child: Text(
                               '${card.status}',
-                              style: GoogleFonts.poppins(
+                              style: GoogleFonts.manrope(
                                   textStyle: TextStyle(
                                       fontSize: 14,
                                       color: statusColor,
@@ -170,8 +196,8 @@ class OrderCard extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(
-                              '${card.location}',
-                              style: GoogleFonts.poppins(
+                              '${card.info}',
+                              style: GoogleFonts.manrope(
                                   textStyle: const TextStyle(
                                       color: Colors.blue,
                                       fontWeight: FontWeight.w600)),
@@ -182,7 +208,7 @@ class OrderCard extends StatelessWidget {
                           Expanded(
                             child: Text(
                               'RM $price',
-                              style: GoogleFonts.poppins(
+                              style: GoogleFonts.manrope(
                                   textStyle: const TextStyle(
                                       color: Color(0xFF00B406),
                                       fontWeight: FontWeight.w600)),
@@ -197,14 +223,14 @@ class OrderCard extends StatelessWidget {
                         children: [
                           Text(
                             displayDate,
-                            style: GoogleFonts.poppins(
+                            style: GoogleFonts.manrope(
                                 textStyle: const TextStyle(
                                     color: Color.fromARGB(255, 121, 97, 255),
                                     fontWeight: FontWeight.w600)),
                           ),
                           Text(
                             displayTime,
-                            style: GoogleFonts.poppins(
+                            style: GoogleFonts.manrope(
                                 textStyle: const TextStyle(
                                     color: Color(0xFFC21C1C),
                                     fontWeight: FontWeight.w600)),
@@ -213,7 +239,7 @@ class OrderCard extends StatelessWidget {
                       ),
                       Text(
                         bila,
-                        style: GoogleFonts.poppins(
+                        style: GoogleFonts.manrope(
                             textStyle: TextStyle(
                                 color: bilaColor, fontWeight: FontWeight.w600)),
                       ),
@@ -242,7 +268,7 @@ class OrderCard extends StatelessWidget {
                                       ),
                                       Text(
                                         'Edit',
-                                        style: GoogleFonts.poppins(
+                                        style: GoogleFonts.manrope(
                                             textStyle: const TextStyle(
                                           fontSize: 20,
                                           color: Colors.green,
@@ -255,13 +281,13 @@ class OrderCard extends StatelessWidget {
                                 InkWell(
                                   splashColor: const Color(0xFF702c00),
                                   onTap: () {
-                                    // _delete();
-                                    // Navigator.push(
-                                    //   context,
-                                    //   MaterialPageRoute(
-                                    //       builder: (context) =>
-                                    //           const HomePage()),
-                                    // );
+                                    _delete();
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const HomePage()),
+                                    );
                                   },
                                   child: Row(
                                     children: [
@@ -274,7 +300,7 @@ class OrderCard extends StatelessWidget {
                                       ),
                                       Text(
                                         'Delete',
-                                        style: GoogleFonts.poppins(
+                                        style: GoogleFonts.manrope(
                                             textStyle: const TextStyle(
                                           fontSize: 20,
                                           color: Color(0xFFC21C1C),
@@ -299,42 +325,35 @@ class OrderCard extends StatelessWidget {
   }
 }
 
-  /// Notification
-  // Future notifService(time, index) async {
-  //   await NotificationService.showNotification(
-  //       id: index, title: 'Pending Order', body: 'Today at $time');
-  // }
+/// Notification
+// Future notifService(time, index) async {
+//   await NotificationService.showNotification(
+//       id: index, title: 'Pending Order', body: 'Today at $time');
+// }
 
-  // Future _delete() async {
-  //   User? user = FirebaseAuth.instance.currentUser;
-  //   OrderModel orderModel = OrderModel();
-  //   orderModel.uid = user!.uid;
-  //   try {
-  //     FirebaseFirestore.instance
-  //         .collection('Users')
-  //         .doc(user.uid)
-  //         .collection('Orders')
-  //         .doc('${card.oid}')
-  //         .delete();
-  //     if (card.img != null) {
-  //       // FirebaseStorage.instance.refFromURL('${card.img}').delete();
-  //     }
-  //     Fluttertoast.showToast(
-  //         msg: "Deleted\n(｡•᎔•｡)",
-  //         toastLength: Toast.LENGTH_SHORT,
-  //         gravity: ToastGravity.CENTER,
-  //         timeInSecForIosWeb: 1,
-  //         backgroundColor: const Color(0xFFC21C1C),
-  //         textColor: Colors.white,
-  //         fontSize: 16.0);
-  //   } catch (e) {
-  //     Fluttertoast.showToast(
-  //         msg: "Something went wrong!\n(｡•᎔•｡)",
-  //         toastLength: Toast.LENGTH_SHORT,
-  //         gravity: ToastGravity.CENTER,
-  //         timeInSecForIosWeb: 1,
-  //         backgroundColor: Colors.red,
-  //         textColor: Colors.white,
-  //         fontSize: 16.0);
-  //   }
-  // }
+Future _delete() async {
+  OrderModel orderModel = OrderModel();
+  try {
+    FirebaseFirestore.instance
+        .collection('Orders')
+        .doc('${orderModel.oid}')
+        .delete();
+    Fluttertoast.showToast(
+        msg: "Deleted",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: const Color(0xFFC21C1C),
+        textColor: Colors.white,
+        fontSize: 16.0);
+  } catch (e) {
+    Fluttertoast.showToast(
+        msg: "Something went wrong!\n(｡•᎔•｡)",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0);
+  }
+}
