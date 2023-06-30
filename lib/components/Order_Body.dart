@@ -7,7 +7,8 @@ import 'package:intl/intl.dart';
 import '../Cards/orderCard.dart';
 
 class OrderBody extends StatefulWidget {
-  const OrderBody({Key? key}) : super(key: key);
+  final String msg;
+  const OrderBody({Key? key, required this.msg}) : super(key: key);
 
   @override
   State<OrderBody> createState() => _OrderBodyState();
@@ -21,15 +22,15 @@ class _OrderBodyState extends State<OrderBody> {
   @override
   void initState() {
     super.initState();
-    FilterType();
+    filterType();
   }
 
-  void FilterType() {
-    // if (widget.status == 'Pending') {
-    getItemList();
-    // } else {
-    //   getTodayList();
-    // }
+  void filterType() {
+    if (widget.msg == 'home') {
+      getItemList();
+    } else {
+      getCompletedList();
+    }
   }
 
   @override
@@ -61,7 +62,7 @@ class _OrderBodyState extends State<OrderBody> {
                             height: height * 0.88,
                             child: RefreshIndicator(
                               onRefresh: () async {
-                                FilterType();
+                                filterType();
                               },
                               child: ListView.builder(
                                 itemCount: _itemlist.length,
@@ -84,7 +85,7 @@ class _OrderBodyState extends State<OrderBody> {
   Future getItemList() async {
     var data = await FirebaseFirestore.instance
         .collection("Orders")
-        // .where("Status", isEqualTo: widget.status)
+        .where("status", isNotEqualTo: 'Completed')
         .get();
     setState(() {
       _isLoading = false;
@@ -93,16 +94,15 @@ class _OrderBodyState extends State<OrderBody> {
     });
   }
 
-  // Future getTodayList() async {
-  //   var data = await FirebaseFirestore.instance
-  //       .collection("Orders")
-  //       .where("Status", isEqualTo: widget.status)
-  //       .where('Date', isEqualTo: currentDate)
-  //       .get();
-  //   setState(() {
-  //     _isLoading = false;
-  //     _itemlist =
-  //         List.from(data.docs.map((doc) => OrderList.fromSnapshot(doc)));
-  //   });
-  // }
+  Future getCompletedList() async {
+    var data = await FirebaseFirestore.instance
+        .collection("Orders")
+        .where('status', isEqualTo: 'Completed')
+        .get();
+    setState(() {
+      _isLoading = false;
+      _itemlist =
+          List.from(data.docs.map((doc) => OrderList.fromSnapshot(doc)));
+    });
+  }
 }

@@ -114,7 +114,7 @@ class _NewOrderState extends State<NewOrder>
           if (value!.isEmpty) {
             return value = 'No Detail';
           } else {
-            return value;
+            return null;
           }
         },
         onSaved: (value) {
@@ -413,8 +413,8 @@ class _NewOrderState extends State<NewOrder>
 
   Future postDetailsToFireStore() async {
     var oid = DateTime.now().toString();
-    int sendtime = DateTime(datenow.year, datenow.month, datenow.day,
-            timenow.hour, timenow.minute)
+    int sendtime = DateTime(selectedDates.start.year, selectedDates.start.month,
+            selectedDates.start.day, timenow.hour, timenow.minute)
         .millisecondsSinceEpoch;
     // User? user = _auth.currentUser;
     // orderModel.uid = user!.uid;

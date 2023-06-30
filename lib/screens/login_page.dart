@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'homepage.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -118,10 +120,10 @@ class _LoginPageState extends State<LoginPage> {
           backgroundColor: Colors.green,
           textColor: Colors.white,
           fontSize: 16.0);
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(builder: (context) => const HomePage()),
-      // );
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const HomePage()),
+      );
       setState(() => isLoading = false);
     } catch (e) {
       setState(() => isLoading = false);

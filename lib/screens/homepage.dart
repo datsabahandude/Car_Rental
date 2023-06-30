@@ -1,3 +1,4 @@
+import 'package:car_rental/screens/historypage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -51,8 +52,20 @@ class _HomePageState extends State<HomePage> {
                         fontSize: 26, fontWeight: FontWeight.w600),
                   ),
                 ),
+                actions: [
+                  IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const HistoryPage()));
+                      },
+                      icon: const Icon(Icons.history))
+                ],
               ),
-              body: const OrderBody(),
+              body: const OrderBody(
+                msg: 'home',
+              ),
               floatingActionButton: FloatingActionButton(
                 onPressed: () async {
                   setState(() => isLottie = true);
