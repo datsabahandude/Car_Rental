@@ -1,15 +1,10 @@
 import 'package:car_rental/models/order_display.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-// import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
+// import 'package:intl/intl.dart';
 import '../screens/homepage.dart';
-
-// import '../models/order_model.dart';
 
 class OrderCard extends StatelessWidget {
   final OrderList card;
@@ -19,7 +14,9 @@ class OrderCard extends StatelessWidget {
     /// Status
     var statusColor = card.status == 'Completed'
         ? const Color(0xFF000000)
-        : Colors.amber[900];
+        : card.status == 'In Progress'
+            ? const Color(0xFF00B406)
+            : Colors.amber[900];
 
     /// Date
     DateTime date =
@@ -218,15 +215,15 @@ class OrderCard extends StatelessWidget {
                             textStyle:
                                 const TextStyle(fontWeight: FontWeight.w600)),
                       ),
-                      card.status == 'Completed'
-                          ? Container()
-                          : Text(
+                      card.status == 'Pending'
+                          ? Text(
                               bila,
                               style: GoogleFonts.manrope(
                                   textStyle: TextStyle(
                                       color: bilaColor,
                                       fontWeight: FontWeight.w600)),
-                            ),
+                            )
+                          : Container(),
                     ],
                   ),
                   onTap: () {
@@ -243,7 +240,9 @@ class OrderCard extends StatelessWidget {
                                     : InkWell(
                                         splashColor: const Color(0xff360c72),
                                         onTap: () {
-                                          _edit();
+                                          card.status == 'Pending'
+                                              ? _edit('Pending')
+                                              : _edit('In Progress');
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
@@ -260,15 +259,29 @@ class OrderCard extends StatelessWidget {
                                                 color: Colors.green,
                                               ),
                                             ),
-                                            Text(
-                                              'Completed',
-                                              style: GoogleFonts.manrope(
-                                                  textStyle: const TextStyle(
-                                                fontSize: 20,
-                                                color: Colors.green,
-                                                fontWeight: FontWeight.w500,
-                                              )),
-                                            )
+                                            card.status == 'Pending'
+                                                ? Text(
+                                                    'In Progress',
+                                                    style: GoogleFonts.manrope(
+                                                        textStyle:
+                                                            const TextStyle(
+                                                      fontSize: 20,
+                                                      color: Color(0xFF00B406),
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    )),
+                                                  )
+                                                : Text(
+                                                    'Completed',
+                                                    style: GoogleFonts.manrope(
+                                                        textStyle:
+                                                            const TextStyle(
+                                                      fontSize: 20,
+                                                      color: Color(0xFF00B406),
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    )),
+                                                  )
                                           ],
                                         ),
                                       ),
@@ -380,12 +393,18 @@ class OrderCard extends StatelessWidget {
     }
   }
 
-  Future _edit() async {
+  Future _edit(status) async {
+    String sts;
+    if (status == 'Pending') {
+      sts = 'In Progress';
+    } else {
+      sts = 'Completed';
+    }
     try {
       FirebaseFirestore.instance
           .collection('Orders')
           .doc('${card.oid}')
-          .update({'status': 'Completed'});
+          .update({'status': sts});
       Fluttertoast.showToast(
           msg: "Status Changed",
           toastLength: Toast.LENGTH_SHORT,

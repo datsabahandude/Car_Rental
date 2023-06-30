@@ -19,8 +19,7 @@ class _HistoryPageState extends State<HistoryPage> {
         title: Text(
           'Completed History',
           style: GoogleFonts.manrope(
-            textStyle:
-                const TextStyle(fontSize: 26, fontWeight: FontWeight.w600),
+            textStyle: const TextStyle(fontWeight: FontWeight.w600),
           ),
         ),
       ),

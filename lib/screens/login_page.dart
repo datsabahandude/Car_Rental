@@ -47,7 +47,8 @@ class _LoginPageState extends State<LoginPage> {
                           backgroundColor: Color(0xff360c72),
                           radius: 120,
                           child: CircleAvatar(
-                            backgroundImage: AssetImage('images/Alza.jpg'),
+                            backgroundImage: AssetImage('images/car.png'),
+                            backgroundColor: Colors.white,
                             radius: 118,
                           ),
                         )),
@@ -113,7 +114,7 @@ class _LoginPageState extends State<LoginPage> {
       await _auth.signInWithEmailAndPassword(
           email: _email, password: _password);
       Fluttertoast.showToast(
-          msg: "(☞ﾟ∀ﾟ)☞ Success",
+          msg: "Logged In",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: 1,
@@ -128,7 +129,7 @@ class _LoginPageState extends State<LoginPage> {
     } catch (e) {
       setState(() => isLoading = false);
       Fluttertoast.showToast(
-          msg: "ｰ(  ｰ̀дｰ́ )Incorrect Credentials",
+          msg: "Incorrect Credentials",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: 1,

@@ -48,8 +48,7 @@ class _HomePageState extends State<HomePage> {
                 title: Text(
                   'Syukri Car Rental',
                   style: GoogleFonts.manrope(
-                    textStyle: const TextStyle(
-                        fontSize: 26, fontWeight: FontWeight.w600),
+                    textStyle: const TextStyle(fontWeight: FontWeight.w300),
                   ),
                 ),
                 actions: [
